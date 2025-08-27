@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "My Resume"
 include(":app")
- 
