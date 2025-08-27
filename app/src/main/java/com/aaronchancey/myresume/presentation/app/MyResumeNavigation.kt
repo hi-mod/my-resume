@@ -15,9 +15,9 @@ fun MyResumeNavigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Route.Home,
+        startDestination = Route.Profile,
     ) {
-        composable<Route.Home> {
+        composable<Route.Profile> {
             DeveloperProfileScreen(navController)
         }
     }

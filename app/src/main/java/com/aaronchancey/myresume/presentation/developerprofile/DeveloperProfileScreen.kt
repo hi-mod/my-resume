@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aaronchancey.myresume.R
+import com.aaronchancey.myresume.presentation.app.ResumeNavigationBar
 import com.aaronchancey.myresume.presentation.components.topAppBar
 
 @Composable
@@ -22,6 +23,7 @@ fun DeveloperProfileScreen(
         navController = navController,
         showBackButton = false,
     ),
+    bottomBar = { ResumeNavigationBar(navController) },
 ) { padding ->
     Column(
         modifier = Modifier
