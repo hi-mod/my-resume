@@ -49,8 +49,11 @@ fun ResumeNavigationBar(navController: NavController) {
                     )
                 },
                 label = { Text(stringResource(id = item)) },
-                onClick = { navController.navigate(navRoutes[index]) },
-                selected = index == selectedItem,
+                onClick = {
+                    selectedItem = index
+                    navController.navigate(navRoutes[index])
+                },
+                selected = selectedItem == index,
             )
         }
     }

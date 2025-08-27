@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.aaronchancey.myresume.presentation.developerprofile.DeveloperProfileScreen
+import com.aaronchancey.myresume.presentation.experience.ExperienceScreen
 
 @Composable
 fun MyResumeNavigation(
@@ -18,7 +19,10 @@ fun MyResumeNavigation(
         startDestination = Route.Profile,
     ) {
         composable<Route.Profile> {
-            DeveloperProfileScreen(navController)
+            DeveloperProfileScreen()
+        }
+        composable<Route.Experience> {
+            ExperienceScreen()
         }
     }
 }

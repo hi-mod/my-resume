@@ -51,6 +51,7 @@ fun topAppBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "navigate back",
+                        tint = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
             }
