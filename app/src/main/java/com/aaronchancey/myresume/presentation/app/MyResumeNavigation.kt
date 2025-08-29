@@ -21,6 +21,8 @@ import com.aaronchancey.myresume.presentation.experience.ExperienceScreen
 import com.aaronchancey.myresume.presentation.experience.ExperienceViewModel
 import com.aaronchancey.myresume.presentation.references.ReferencesScreen
 import com.aaronchancey.myresume.presentation.references.ReferencesViewModel
+import com.aaronchancey.myresume.presentation.skills.SkillsScreen
+import com.aaronchancey.myresume.presentation.skills.SkillsViewModel
 
 @Composable
 fun MyResumeNavigation(
@@ -81,6 +83,11 @@ fun MyResumeNavigation(
             val viewModel = hiltViewModel<ReferencesViewModel>()
             val state by viewModel.state.collectAsStateWithLifecycle()
             ReferencesScreen(state = state)
+        }
+        composable<Route.Skills> {
+            val viewModel = hiltViewModel<SkillsViewModel>()
+            val state by viewModel.state.collectAsStateWithLifecycle()
+            SkillsScreen(state = state)
         }
     }
 }
