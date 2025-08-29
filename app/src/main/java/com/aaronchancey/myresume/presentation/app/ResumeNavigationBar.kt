@@ -1,7 +1,7 @@
 package com.aaronchancey.myresume.presentation.app
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DownhillSkiing
+import androidx.compose.material.icons.filled.AccountTree
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.material.icons.filled.WorkHistory
@@ -37,7 +37,7 @@ fun ResumeNavigationBar(navController: NavController) {
         Icons.Default.TextFields,
         Icons.Default.WorkHistory,
         Icons.Default.People,
-        Icons.Default.DownhillSkiing,
+        Icons.Default.AccountTree,
     )
     NavigationBar {
         items.forEachIndexed { index, item ->
