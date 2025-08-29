@@ -1,6 +1,7 @@
 package com.aaronchancey.myresume.presentation.components
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -20,6 +21,7 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 fun topAppBar(
     @StringRes title: Int,
+    subtitle: String? = null,
     navController: NavController,
     actions: @Composable RowScope.() -> Unit = {},
     showBackButton: Boolean = true,
@@ -27,10 +29,18 @@ fun topAppBar(
 ): @Composable () -> Unit = {
     TopAppBar(
         title = {
-            Text(
-                text = stringResource(title),
-                style = MaterialTheme.typography.headlineSmall,
-            )
+            Column {
+                Text(
+                    text = stringResource(title),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+                subtitle?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,

@@ -10,6 +10,12 @@ sealed interface Route {
     data object Experience : Route
 
     @Serializable
+    data object ExperienceList : Route
+
+    @Serializable
+    data class ExperienceDetails(val experienceId: Int? = null) : Route
+
+    @Serializable
     data object References : Route
 
     @Serializable

@@ -3,6 +3,7 @@
     <string name="profile">Profile</string>
     <string name="profileStory">Software Engineer with over a decade of experience designing, architecting, and delivering high-performance Android and cross-platform applications. Expert in Kotlin (JVM and Multiplatform), Jetpack Compose, and modern mobile architectures (MVI, MVVM, Clean Architecture). Proven track record leading feature development, modernizing legacy systems, and building scalable, user-focused solutions across industries including healthcare, finance, retail, and automotive. Skilled at collaborating with cross-functional teams, integrating complex APIs, and driving code quality through testing, modularization, and CI/CD practices. Adept at delivering business-critical features while ensuring maintainability, performance, and accessibility.</string>
     <string name="experience">Experience</string>
+    <string name="experienceDetails">Experience Details</string>
     <string name="references">References</string>
     <string name="skills">Skills</string>
 </resources>

@@ -29,7 +29,7 @@ fun ResumeNavigationBar(navController: NavController) {
     )
     val navRoutes = listOf(
         Route.Profile,
-        Route.Experience,
+        Route.ExperienceList,
         Route.References,
         Route.Skills,
     )
