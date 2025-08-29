@@ -19,6 +19,8 @@ import com.aaronchancey.myresume.presentation.developerprofile.DeveloperProfileS
 import com.aaronchancey.myresume.presentation.experience.ExperienceDetailsScreen
 import com.aaronchancey.myresume.presentation.experience.ExperienceScreen
 import com.aaronchancey.myresume.presentation.experience.ExperienceViewModel
+import com.aaronchancey.myresume.presentation.references.ReferencesScreen
+import com.aaronchancey.myresume.presentation.references.ReferencesViewModel
 
 @Composable
 fun MyResumeNavigation(
@@ -74,6 +76,11 @@ fun MyResumeNavigation(
                 }
                 ExperienceDetailsScreen(experienceEntryDetails = experienceEntryDetails)
             }
+        }
+        composable<Route.References> {
+            val viewModel = hiltViewModel<ReferencesViewModel>()
+            val state by viewModel.state.collectAsStateWithLifecycle()
+            ReferencesScreen(state = state)
         }
     }
 }
