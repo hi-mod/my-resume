@@ -1,6 +1,5 @@
 package com.aaronchancey.myresume.presentation.experience
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aaronchancey.myresume.database.ExperienceEntryRepository
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.stateIn
 @HiltViewModel
 class ExperienceViewModel @Inject constructor(
     experienceEntryRepository: ExperienceEntryRepository,
-    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _experienceState = MutableStateFlow(ExperienceState())
     val experienceState = _experienceState.map { state ->

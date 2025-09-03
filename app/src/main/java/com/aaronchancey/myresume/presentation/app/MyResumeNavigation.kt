@@ -16,6 +16,7 @@ import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.aaronchancey.myresume.presentation.developerprofile.DeveloperProfileScreen
+import com.aaronchancey.myresume.presentation.developerprofile.ProfileViewModel
 import com.aaronchancey.myresume.presentation.experience.ExperienceDetailsScreen
 import com.aaronchancey.myresume.presentation.experience.ExperienceScreen
 import com.aaronchancey.myresume.presentation.experience.ExperienceViewModel
@@ -36,7 +37,9 @@ fun MyResumeNavigation(
     ) {
         println("start of navhost")
         composable<Route.Profile> {
-            DeveloperProfileScreen()
+            val viewModel = hiltViewModel<ProfileViewModel>()
+            val state by viewModel.profileState.collectAsStateWithLifecycle()
+            DeveloperProfileScreen(state = state)
         }
         navigation<Route.Experience>(Route.ExperienceList) {
             composable<Route.ExperienceList> {
