@@ -67,6 +67,10 @@ dependencies {
     implementation(libs.ktor.serialization)
     implementation(libs.ktor.client.logging)
 
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
