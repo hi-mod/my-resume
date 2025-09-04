@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,7 +32,9 @@ fun ReferencesScreen(
     modifier: Modifier = Modifier,
     state: ReferencesState,
 ) = Column(
-    modifier = modifier.padding(16.dp),
+    modifier = modifier
+        .padding(16.dp)
+        .fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
 ) {
     LoadingIndicator(

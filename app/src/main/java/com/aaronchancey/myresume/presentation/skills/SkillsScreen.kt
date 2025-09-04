@@ -2,6 +2,7 @@ package com.aaronchancey.myresume.presentation.skills
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,6 +24,7 @@ fun SkillsScreen(
 ) = Column(
     modifier = modifier
         .padding(horizontal = 16.dp, vertical = 16.dp)
+        .fillMaxSize()
         .verticalScroll(rememberScrollState()),
     horizontalAlignment = Alignment.CenterHorizontally,
 ) {
