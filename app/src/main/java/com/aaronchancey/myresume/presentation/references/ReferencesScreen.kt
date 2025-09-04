@@ -18,11 +18,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.aaronchancey.myresume.domain.Reference
+import com.aaronchancey.myresume.presentation.components.LoadingIndicator
 
 @Composable
 fun ReferencesScreen(
@@ -30,10 +32,15 @@ fun ReferencesScreen(
     state: ReferencesState,
 ) = Column(
     modifier = modifier.padding(16.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
 ) {
-    state.references.forEach { reference ->
-        ReferenceItem(reference = reference)
-        Spacer(modifier = Modifier.height(16.dp))
+    LoadingIndicator(
+        loading = state.loading,
+    ) {
+        state.references.forEach { reference ->
+            ReferenceItem(reference = reference)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
 
