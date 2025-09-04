@@ -8,11 +8,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aaronchancey.myresume.domain.ExperienceEntry
 import com.aaronchancey.myresume.presentation.app.Route
+import com.aaronchancey.myresume.presentation.components.LoadingIndicator
 
 @Composable
 fun ExperienceScreen(
@@ -23,13 +25,18 @@ fun ExperienceScreen(
     modifier = modifier
         .fillMaxSize()
         .padding(16.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
 ) {
-    state.experienceEntries.forEachIndexed { index, experienceEntry ->
-        ExperienceEntryCard(
-            modifier = Modifier.padding(bottom = if (index == state.experienceEntries.lastIndex) 0.dp else 16.dp),
-            experienceEntry = experienceEntry,
-            navController = navController,
-        )
+    LoadingIndicator(
+        loading = state.loading,
+    ) {
+        state.experienceEntries.forEachIndexed { index, experienceEntry ->
+            ExperienceEntryCard(
+                modifier = Modifier.padding(bottom = if (index == state.experienceEntries.lastIndex) 0.dp else 16.dp),
+                experienceEntry = experienceEntry,
+                navController = navController,
+            )
+        }
     }
 }
 

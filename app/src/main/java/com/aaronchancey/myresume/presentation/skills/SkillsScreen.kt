@@ -11,8 +11,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.aaronchancey.myresume.presentation.components.LoadingIndicator
 
 @Composable
 fun SkillsScreen(
@@ -22,21 +24,26 @@ fun SkillsScreen(
     modifier = modifier
         .padding(horizontal = 16.dp, vertical = 16.dp)
         .verticalScroll(rememberScrollState()),
+    horizontalAlignment = Alignment.CenterHorizontally,
 ) {
-    state.skills.forEach { skillGroup ->
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = skillGroup.title,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                skillGroup.skills.forEach { skill ->
-                    Text(text = "• $skill")
+    LoadingIndicator(
+        loading = state.loading,
+    ) {
+        state.skills.forEach { skillGroup ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = skillGroup.title,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                    skillGroup.skills.forEach { skill ->
+                        Text(text = "• $skill")
+                    }
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
         }
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }

@@ -2,7 +2,7 @@ package com.aaronchancey.myresume.presentation.developerprofile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aaronchancey.myresume.data.ProfileRepository
+import com.aaronchancey.myresume.data.ResumeRepository
 import com.aaronchancey.myresume.data.onError
 import com.aaronchancey.myresume.data.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.update
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository,
+    private val profileRepository: ResumeRepository,
 ) : ViewModel() {
     private val _profileState = MutableStateFlow(ProfileState())
     val profileState = combine(_profileState, getProfile()) { state, profile ->

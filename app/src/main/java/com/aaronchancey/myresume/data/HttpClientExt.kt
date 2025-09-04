@@ -38,7 +38,8 @@ suspend inline fun <reified T> responseToResult(
         in 200..299 -> {
             try {
                 Result.Success(response.body<T>())
-            } catch (_: NoTransformationFoundException) {
+            } catch (e: NoTransformationFoundException) {
+                println(e)
                 Result.Error(DataError.Remote.SERIALIZATION)
             }
         }
