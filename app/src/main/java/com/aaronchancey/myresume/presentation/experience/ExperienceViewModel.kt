@@ -3,9 +3,9 @@ package com.aaronchancey.myresume.presentation.experience
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aaronchancey.myresume.data.ResumeRepository
-import com.aaronchancey.myresume.data.onError
-import com.aaronchancey.myresume.data.onSuccess
 import com.aaronchancey.myresume.domain.mappers.toExperienceEntry
+import com.aaronchancey.myresume.domain.onError
+import com.aaronchancey.myresume.domain.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

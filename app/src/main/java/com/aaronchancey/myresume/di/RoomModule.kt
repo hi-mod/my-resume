@@ -2,7 +2,7 @@ package com.aaronchancey.myresume.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import com.aaronchancey.myresume.database.ResumeDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +13,9 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object RoomModule {
     @Provides
-    fun provideRoomDatabase(@ApplicationContext applicationContext: Context) = Room.databaseBuilder(
+    fun provideResumeDatabase(@ApplicationContext applicationContext: Context): ResumeDatabase = Room.databaseBuilder(
         context = applicationContext,
-        klass = RoomDatabase::class.java,
+        klass = ResumeDatabase::class.java,
         name = "resume-database",
     ).build()
 }

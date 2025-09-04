@@ -3,10 +3,9 @@ package com.aaronchancey.myresume.presentation.references
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aaronchancey.myresume.data.ResumeRepository
-import com.aaronchancey.myresume.data.onError
-import com.aaronchancey.myresume.data.onSuccess
-import com.aaronchancey.myresume.database.ReferenceRepository
 import com.aaronchancey.myresume.domain.mappers.toReference
+import com.aaronchancey.myresume.domain.onError
+import com.aaronchancey.myresume.domain.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +17,6 @@ import kotlinx.coroutines.flow.update
 
 @HiltViewModel
 class ReferencesViewModel @Inject constructor(
-    referenceRepository: ReferenceRepository,
     private val resumeRepository: ResumeRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(ReferencesState())

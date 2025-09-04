@@ -2,6 +2,7 @@ package com.aaronchancey.myresume.data
 
 import android.util.Log
 import com.aaronchancey.myresume.domain.DataError
+import com.aaronchancey.myresume.domain.Result
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.SocketTimeoutException

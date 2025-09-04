@@ -23,6 +23,6 @@ fun DeveloperProfileScreen(
     LoadingIndicator(
         loading = state.loading,
     ) {
-        Text(state.profile)
+        Text(state.profile.profileText)
     }
 }

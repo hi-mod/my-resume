@@ -1,6 +1,4 @@
-package com.aaronchancey.myresume.data
-
-import com.aaronchancey.myresume.domain.Error
+package com.aaronchancey.myresume.domain
 
 sealed interface Result<out D, out E : Error> {
     data class Success<out D>(val data: D) : Result<D, Nothing>
@@ -21,6 +19,7 @@ inline fun <T, E : Error> Result<T, E>.onSuccess(action: (T) -> Unit): Result<T,
         this
     }
 }
+
 inline fun <T, E : Error> Result<T, E>.onError(action: (E, String?) -> Unit): Result<T, E> = when (this) {
     is Result.Error -> {
         action(error, data)
