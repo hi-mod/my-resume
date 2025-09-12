@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -14,7 +14,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
-import androidx.navigation.toRoute
 import com.aaronchancey.myresume.presentation.developerprofile.DeveloperProfileScreen
 import com.aaronchancey.myresume.presentation.developerprofile.ProfileViewModel
 import com.aaronchancey.myresume.presentation.experience.ExperienceDetailsScreen
@@ -58,7 +57,6 @@ fun MyResumeNavigation(
                     },
                 ),
             ) {
-                val route = it.toRoute<Route.ExperienceDetails>()
                 val viewModel = it.sharedViewModel<ExperienceViewModel>(navController)
                 val state by viewModel.experienceState.collectAsStateWithLifecycle()
                 println("savedStateHandle: ${it.savedStateHandle.get<Int>("experienceId")}")
