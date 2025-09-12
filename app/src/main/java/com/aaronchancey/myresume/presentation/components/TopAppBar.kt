@@ -1,6 +1,7 @@
 package com.aaronchancey.myresume.presentation.components
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
@@ -14,6 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -53,6 +55,7 @@ fun topAppBar(
         navigationIcon = {
             if (showBackButton) {
                 IconButton(
+                    interactionSource = remember { MutableInteractionSource() },
                     onClick = {
                         onNavigateUp()
                         navController.navigateUp()
