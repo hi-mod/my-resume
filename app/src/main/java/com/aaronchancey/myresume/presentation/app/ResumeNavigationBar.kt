@@ -1,5 +1,6 @@
 package com.aaronchancey.myresume.presentation.app
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountTree
 import androidx.compose.material.icons.filled.People
@@ -11,50 +12,67 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.aaronchancey.myresume.R
 
 @Composable
 fun ResumeNavigationBar(navController: NavController) {
-    var selectedItem by remember { mutableIntStateOf(0) }
-    val items = listOf(
-        R.string.profile,
-        R.string.experience,
-        R.string.references,
-        R.string.skills,
-    )
-    val navRoutes = listOf(
-        Route.Profile,
-        Route.ExperienceList,
-        Route.References,
-        Route.Skills,
-    )
-    val icons = listOf(
-        Icons.Default.TextFields,
-        Icons.Default.WorkHistory,
-        Icons.Default.People,
-        Icons.Default.AccountTree,
+    val topLevelRoutes = listOf(
+        TopLevelRoute(
+            name = R.string.profile,
+            route = Route.Profile,
+            icon = Icons.Default.TextFields,
+        ),
+        TopLevelRoute(
+            name = R.string.experience,
+            route = Route.ExperienceList,
+            icon = Icons.Default.WorkHistory,
+        ),
+        TopLevelRoute(
+            name = R.string.references,
+            route = Route.References,
+            icon = Icons.Default.People,
+        ),
+        TopLevelRoute(
+            name = R.string.skills,
+            route = Route.Skills,
+            icon = Icons.Default.AccountTree,
+        ),
     )
     NavigationBar {
-        items.forEachIndexed { index, item ->
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
+        topLevelRoutes.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
                     Icon(
-                        imageVector = icons[index],
+                        imageVector = item.icon,
                         contentDescription = "",
                     )
                 },
-                label = { Text(stringResource(id = item)) },
+                label = { Text(stringResource(id = item.name)) },
                 onClick = {
-                    selectedItem = index
-                    navController.navigate(navRoutes[index])
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
-                selected = selectedItem == index,
+                selected = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true,
             )
         }
     }
 }
+
+private data class TopLevelRoute<T : Route>(
+    @param:StringRes val name: Int,
+    val route: T,
+    val icon: ImageVector,
+)

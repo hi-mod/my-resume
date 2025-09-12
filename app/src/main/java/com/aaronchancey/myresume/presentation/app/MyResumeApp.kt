@@ -15,20 +15,24 @@ import com.aaronchancey.myresume.presentation.components.topAppBar
 fun MyResumeApp(navHostController: NavHostController) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    println("currentRoute: $currentRoute")
     Scaffold(
         topBar = topAppBar(
-            title = when (currentRoute) {
-                Route.ExperienceList::class.qualifiedName -> R.string.experience
-                Route.Profile::class.qualifiedName -> R.string.profile
-                Route.References::class.qualifiedName -> R.string.references
-                Route.Skills::class.qualifiedName -> R.string.skills
-                else -> if (currentRoute?.contains(Route.ExperienceDetails::class.qualifiedName ?: "") == true) R.string.experienceDetails else R.string.app_name
+            title = when {
+                currentRoute == Route.ExperienceList::class.qualifiedName -> R.string.experience
+                currentRoute == Route.Profile::class.qualifiedName -> R.string.profile
+                currentRoute == Route.References::class.qualifiedName -> R.string.references
+                currentRoute == Route.Skills::class.qualifiedName -> R.string.skills
+                currentRoute?.startsWith(Route.ExperienceDetails::class.qualifiedName ?: "") == true -> R.string.experienceDetails
+                else -> R.string.app_name
             },
             navController = navHostController,
-            showBackButton = currentRoute != Route.Profile::class.qualifiedName,
+            showBackButton = !topLevelRoutes.contains(currentRoute),
         ),
-        bottomBar = { ResumeNavigationBar(navHostController) },
+        bottomBar = {
+            if (topLevelRoutes.contains(currentRoute)) {
+                ResumeNavigationBar(navHostController)
+            }
+        },
     ) { padding ->
         Column(
             modifier = Modifier.padding(padding),
@@ -37,3 +41,10 @@ fun MyResumeApp(navHostController: NavHostController) {
         }
     }
 }
+
+private val topLevelRoutes = arrayOf(
+    Route.Profile::class.qualifiedName,
+    Route.Skills::class.qualifiedName,
+    Route.References::class.qualifiedName,
+    Route.ExperienceList::class.qualifiedName,
+)
