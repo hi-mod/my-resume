@@ -10,37 +10,34 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val profileRepository: ResumeRepository,
 ) : ViewModel() {
     private val _profileState = MutableStateFlow(ProfileState())
-    val profileState = combine(_profileState, getProfile()) { state, profile ->
-        state.copy(
-            profile = profile,
-        )
-    }
+    val profileState = _profileState
+        .onStart { getProfile() }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
             initialValue = ProfileState(),
         )
 
-    private fun getProfile() = flow {
+    private fun getProfile() {
         _profileState.update { it.copy(loading = true) }
-        profileRepository.getProfile()
-            .onSuccess { profile ->
-                emit(profile)
-                _profileState.update { it.copy(loading = false) }
-            }
-            .onError { dataError, data ->
-                emit(Profile(profileText = ""))
-                _profileState.update { it.copy(loading = false) }
-            }
+        viewModelScope.launch {
+            profileRepository.getProfile()
+                .onSuccess { profile ->
+                    _profileState.update { it.copy(loading = false, profile = profile) }
+                }
+                .onError { dataError, data ->
+                    _profileState.update { it.copy(loading = false, profile = Profile(profileText = "")) }
+                }
+        }
     }
 }
